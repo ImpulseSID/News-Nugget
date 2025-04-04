@@ -41,7 +41,9 @@ const Homepage = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/news?topic=${selectedCategory}`,
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/news?topic=${selectedCategory}`,
         { mode: "cors" }
       );
       const newsResults = await response.json();
@@ -68,7 +70,7 @@ const Homepage = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/news/search?q=${searchQuery}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/news/search?q=${searchQuery}`,
         {
           mode: "cors",
         }
