@@ -1,0 +1,144 @@
+:root {
+  --primary-color: #1a1f2c;
+  --secondary-color: #9b87f5;
+  --accent-color: #6e59a5;
+  --text-color: #f0f0f0;
+  --background-color: #121212;
+  --card-background: #1e1e1e;
+  --border-color: #2a2a2a;
+  --hover-color: #2e2e2e;
+}
+
+.container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, sans-serif;
+}
+
+/* Header */
+.header {
+  background-color: var(--primary-color);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 0 20px rgba(155, 135, 245, 0.15);
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(
+    90deg,
+    var(--secondary-color),
+    var(--accent-color)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  color: #cccccc;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 3rem 2rem;
+}
+
+.section {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(155, 135, 245, 0.1);
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.3);
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #ccc;
+}
+
+.link {
+  color: var(--secondary-color);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: var(--accent-color);
+}
+
+/* Back Button */
+.backButtonContainer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.backButton {
+  padding: 0.75rem 2rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #7e69ab;
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary-color);
+  padding: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footerSection h3 {
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.footerSection p {
+  font-size: 0.95rem;
+  color: #aaa;
+  line-height: 1.5;
+}

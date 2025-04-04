@@ -64,14 +64,17 @@ const Homepage = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-  
+
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/news/search?q=${searchQuery}`, {
-        mode: "cors",
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/news/search?q=${searchQuery}`,
+        {
+          mode: "cors",
+        }
+      );
       const searchResults = await response.json();
-  
+
       if (searchResults.length > 0) {
         setFeaturedNews(searchResults[0]);
         setSecondaryNews(searchResults.slice(1, 3));
@@ -328,7 +331,7 @@ const Homepage = () => {
               relevant information to you.
             </p>
           </div>
-          <div className={styles.footerSection}>
+          <div className={`${styles.footerSection} ${styles.quickLinks}`}>
             <h3>Quick Links</h3>
             <ul>
               <li>
@@ -337,7 +340,9 @@ const Homepage = () => {
               <li>
                 <Link to="/summarizer">AI Summarizer</Link>
               </li>
-              <li>About Us</li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
             </ul>
           </div>
         </div>

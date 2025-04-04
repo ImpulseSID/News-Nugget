@@ -165,7 +165,7 @@ function Summarizer() {
               relevant information to you.
             </p>
           </div>
-          <div className={styles.footerSection}>
+          <div className={`${styles.footerSection} ${styles.quickLinks}`}>
             <h3>Quick Links</h3>
             <ul>
               <li>

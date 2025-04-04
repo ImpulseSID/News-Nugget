@@ -360,6 +360,11 @@
   color: var(--secondary-color);
 }
 
+.quickLinks {
+  text-align: right;
+  justify-self: end;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 900px) {
   .header {

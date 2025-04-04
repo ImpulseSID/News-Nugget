@@ -498,12 +498,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: right;
 }
 
 .footerSection li {
   margin-bottom: 0.5rem;
   cursor: pointer;
   transition: color 0.2s ease;
+  text-align: right;
 }
 
 .footerSection li:hover {
@@ -518,42 +520,9 @@
 .footerSection a:hover {
   color: var(--secondary-color);
 }
-
-.subscribeForm {
-  display: flex;
-  margin-top: 1rem;
-}
-
-.subscribeForm input {
-  flex: 1;
-  padding: 0.75rem 1.25rem;
-  border-radius: 50px 0 0 50px;
-  border: 1px solid var(--border-color);
-  background-color: rgba(30, 30, 30, 0.8);
-  color: var(--text-color);
-}
-
-.subscribeForm button {
-  padding: 0.75rem 1.25rem;
-  background: linear-gradient(90deg, #9b87f5, #7e69ab);
-  color: white;
-  border: none;
-  border-radius: 0 50px 50px 0;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.subscribeForm button:hover {
-  filter: brightness(1.1);
-}
-
-.copyright {
-  text-align: center;
-  padding-top: 1.5rem;
-  margin-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
-  color: #999;
-  font-size: 0.9rem;
+.quickLinks {
+  text-align: right;
+  justify-self: end;
 }
 
 /* Responsive Adjustments */
