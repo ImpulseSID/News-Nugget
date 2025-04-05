@@ -110,6 +110,9 @@ async function summarizeArticle(articleUrl) {
     // Step 1: Extractive summarization
     const extractiveSummary = extractTopSentences(articleContent, 0.7); // Top 70%
 
+    // Limit input size (Gemini safe limit)
+    extractiveSummary = extractiveSummary.slice(0, 4000);
+
     // Step 2: Gemini Abstractive summarization
     const refinedSummary = await callGeminiAPI(extractiveSummary, apiKey);
 
@@ -174,11 +177,19 @@ async function callGeminiAPI(text, apiKey) {
 
   const data = await response.json();
 
-  if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-    return data.candidates[0].content.parts[0].text.trim();
+  if (!response.ok) {
+    console.error("Gemini API Error:", data);
+    throw new Error(
+      data.error?.message || "Failed to summarize text using Gemini"
+    );
   }
 
-  throw new Error("Failed to summarize text using Gemini");
+  const summary = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (summary) {
+    return summary.trim();
+  }
+
+  throw new Error("No valid summary returned from Gemini");
 }
 
 // --------- Clean & Extract Article Content ---------
