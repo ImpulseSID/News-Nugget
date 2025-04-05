@@ -99,11 +99,10 @@ app.listen(PORT, () => {
 // --------- Summarization Pipeline ---------
 async function summarizeArticle(articleUrl) {
   try {
-    const apiKey =
-      process.env.VITE_HUGGINGFACE_API_KEY || "YOUR_HUGGINGFACE_API_KEY";
+    const apiKey = process.env.VITE_GEMINI_API_KEY;
 
     if (!apiKey) {
-      throw new Error("Missing Hugging Face API Key");
+      throw new Error("Missing Gemini API Key");
     }
 
     const articleContent = await fetchArticleContent(articleUrl);
@@ -111,8 +110,8 @@ async function summarizeArticle(articleUrl) {
     // Step 1: Extractive summarization
     const extractiveSummary = extractTopSentences(articleContent, 0.7); // Top 70%
 
-    // Step 2: BART Abstractive summarization
-    const refinedSummary = await callHuggingFaceAPI(extractiveSummary, apiKey);
+    // Step 2: Gemini Abstractive summarization
+    const refinedSummary = await callGeminiAPI(extractiveSummary, apiKey);
 
     return refinedSummary;
   } catch (error) {
@@ -150,37 +149,36 @@ function extractTopSentences(text, percentage = 0.7) {
   return topSentences;
 }
 
-async function callHuggingFaceAPI(text, apiKey) {
+async function callGeminiAPI(text, apiKey) {
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" +
+      apiKey,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        inputs: text,
-        parameters: {
-          max_length: 1000,
-          min_length: 200,
-          do_sample: false,
-        },
+        contents: [
+          {
+            parts: [
+              {
+                text: `Summarize the following article content:\n\n${text}`,
+              },
+            ],
+          },
+        ],
       }),
     }
   );
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || "Failed to summarize text");
-  }
-
   const data = await response.json();
-  if (Array.isArray(data) && data[0].summary_text) {
-    return data[0].summary_text.trim();
+
+  if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+    return data.candidates[0].content.parts[0].text.trim();
   }
 
-  throw new Error("Invalid summary format from Hugging Face API");
+  throw new Error("Failed to summarize text using Gemini");
 }
 
 // --------- Clean & Extract Article Content ---------
