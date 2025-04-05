@@ -154,7 +154,7 @@ function extractTopSentences(text, percentage = 0.7) {
 
 async function callGeminiAPI(text, apiKey) {
   const response = await fetch(
-    "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=" +
+    "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-latest:generateContent?key=" +
       apiKey,
     {
       method: "POST",
@@ -164,6 +164,7 @@ async function callGeminiAPI(text, apiKey) {
       body: JSON.stringify({
         contents: [
           {
+            role: "user",
             parts: [
               {
                 text: `Summarize the following article content:\n\n${text}`,
