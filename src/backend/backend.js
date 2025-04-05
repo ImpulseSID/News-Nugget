@@ -108,7 +108,7 @@ async function summarizeArticle(articleUrl) {
     const articleContent = await fetchArticleContent(articleUrl);
 
     // Step 1: Extractive summarization
-    const extractiveSummary = extractTopSentences(articleContent, 0.7); // Top 70%
+    let extractiveSummary = extractTopSentences(articleContent, 0.7); // Top 70%
 
     // Limit input size (Gemini safe limit)
     extractiveSummary = extractiveSummary.slice(0, 4000);
