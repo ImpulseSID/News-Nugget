@@ -1,6 +1,6 @@
 # 🗞️ News Nugget
 
-News Nugget is an AI-powered news aggregator website that scrapes the latest headlines from the web and provides concise summaries using natural language processing. Built using Express.js for the backend and React for the frontend, it leverages APIs like GNews and Hugging Face to deliver categorized, searchable, and summarized news articles.
+News Nugget is an AI-powered news aggregator website that scrapes the latest headlines from the web and provides concise summaries using natural language processing. Built using Express.js for the backend and React for the frontend, it leverages APIs like GNews and **Gemini** to deliver categorized, searchable, and summarized news articles.
 
 ---
 
@@ -8,7 +8,7 @@ News Nugget is an AI-powered news aggregator website that scrapes the latest hea
 
 - 🔍 **Search News** — Search global news articles by keywords using GNews API.
 - 📰 **Category-wise Headlines** — Browse top news from categories like Technology, Sports, Business, and more.
-- ✂️ **AI Summarization** — Summarizes full articles using extractive + abstractive methods (via Hugging Face's BART model).
+- ✂️ **AI Summarization** — Summarizes full articles using extractive + abstractive methods (via Google's Gemini API).
 - 🌐 **Clean Web Scraping** — Scrapes article content using `unfluff` for accurate and clean summaries.
 - ⚡ **Fast and Lightweight** — Node.js + Express backend with minimal dependencies.
 
@@ -20,7 +20,7 @@ News Nugget is an AI-powered news aggregator website that scrapes the latest hea
 - **Backend**: Express.js
 - **NLP & Summarization**:
   - `natural` for extractive summarization
-  - Hugging Face Transformers API (BART model) for abstractive summarization
+  - **Gemini API** (Google AI) for abstractive summarization
 - **Scraping**: `unfluff`, `node-fetch`
 - **News Provider**: GNews API
 - **Environment Variables**: `dotenv`
@@ -48,7 +48,7 @@ Create a `.env` file in the root directory and add the following:
 
 ```
 VITE_GNEWS_API_KEY=your_gnews_api_key
-VITE_HUGGINGFACE_API_KEY=your_huggingface_api_key
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
 ### 4. Start the Server
@@ -57,8 +57,7 @@ VITE_HUGGINGFACE_API_KEY=your_huggingface_api_key
 npm run dev
 ```
 
-Frontend will run at: [http://localhost:8080](http://localhost:8080)
-
+Frontend will run at: [http://localhost:8080](http://localhost:8080)  
 Backend will run at: [http://localhost:5000](http://localhost:5000)
 
 ---
@@ -115,7 +114,7 @@ Summarize a news article from a URL
 
 1. **Scrape** full content from a news article URL using `unfluff`.
 2. **Extract** top 70% of information-rich sentences using `natural`.
-3. **Summarize** those sentences using Hugging Face's `facebook/bart-large-cnn` model.
+3. **Summarize** those sentences using **Google’s Gemini API**.
 4. **Serve** the summary via the API.
 
 ---
@@ -138,5 +137,5 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 ## 🙌 Acknowledgements
 
 - [GNews.io](https://gnews.io/) — Free news data API
-- [Hugging Face](https://huggingface.co/) — AI model hosting
+- [Google AI](https://deepmind.google/technologies/gemini/) — Gemini API for text generation
 - [Unfluff](https://github.com/ageitgey/node-unfluff) — Article scraping
