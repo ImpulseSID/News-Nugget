@@ -48,7 +48,7 @@ Create a `.env` file in the root directory and add the following:
 
 ```
 VITE_GNEWS_API_KEY=your_gnews_api_key
-GEMINI_API_KEY=your_gemini_api_key
+VITE_GEMINI_API_KEY=your_gemini_api_key
 ```
 
 ### 4. Start the Server
