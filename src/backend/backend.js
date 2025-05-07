@@ -113,10 +113,14 @@ async function summarizeArticle(articleUrl) {
     // Limit input size (Gemini safe limit)
     extractiveSummary = extractiveSummary.slice(0, 4000);
 
-    // Step 2: Gemini Abstractive summarization
-    const refinedSummary = await callGeminiAPI(extractiveSummary, apiKey);
-
-    return refinedSummary;
+    // Step 2: Try Gemini Abstractive summarization
+    try {
+      const refinedSummary = await callGeminiAPI(extractiveSummary, apiKey);
+      return refinedSummary;
+    } catch (err) {
+      console.warn("⚠️ Gemini API failed. Using extractive summary instead.");
+      return extractiveSummary; // fallback
+    }
   } catch (error) {
     console.error("Error summarizing article:", error);
     throw error;
